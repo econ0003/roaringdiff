@@ -1,0 +1,120 @@
+{
+    IBClasses = (
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }, 
+        {
+            ACTIONS = {
+                chooseNewLeft = id; 
+                chooseNewRight = id; 
+                ignoreAllWhitespace = id; 
+                ignoreBlankLines = id; 
+                ignoreCase = id; 
+                ignoreWhitespaceChanges = id; 
+                nextChange = id; 
+                nextLine = id; 
+                prevChange = id; 
+                prevLine = id; 
+                reloadDiff = id; 
+                reverseFiles = id; 
+            }; 
+            CLASS = MyCompareMenuController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {diffView = id; horzView = id; pickFilesResponder = MyPickFilesResponder; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            CLASS = MyDiffHorzScroller; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {diffView = id; }; 
+            SUPERCLASS = NSScroller; 
+        }, 
+        {
+            ACTIONS = {menuSelect = id; }; 
+            CLASS = MyDiffMenuController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {diffView = id; menuData = id; }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {doVertScroll = id; }; 
+            CLASS = MyDiffVertScroller; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {diffView = id; }; 
+            SUPERCLASS = NSScroller; 
+        }, 
+        {
+            CLASS = MyHorzCompareView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {diffView = MyQuickDrawView; }; 
+            SUPERCLASS = NSQuickDrawView; 
+        }, 
+        {
+            ACTIONS = {
+                buttonCompareFiles = id; 
+                compareFiles = id; 
+                leftFileSelect = id; 
+                leftFileTextEntry = id; 
+                rightFileSelect = id; 
+                rightFileTextEntry = id; 
+            }; 
+            CLASS = MyPickFilesResponder; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                changeMenu = id; 
+                changeMenuController = id; 
+                diffView = id; 
+                diffWindow = id; 
+                leftFileName = id; 
+                leftFileStats = id; 
+                rightFileName = id; 
+                rightFileStats = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {
+                editColorAdd = id; 
+                editColorBackground = id; 
+                editColorChange = id; 
+                editColorDel = id; 
+                editFontSize = id; 
+                editIgnoreAllWhitespace = id; 
+                editIgnoreBlankLines = id; 
+                editIgnoreCase = id; 
+                editIgnoreWhitespaceChanges = id; 
+                editTabWidth = id; 
+                init = id; 
+                toggleShowLineNos = id; 
+            }; 
+            CLASS = MyPrefsController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                colorAdd = id; 
+                colorBackground = id; 
+                colorChange = id; 
+                colorDel = id; 
+                diffWindow = id; 
+                fontSize = id; 
+                ignoreAllWhitespace = id; 
+                ignoreBlankLines = id; 
+                ignoreCase = id; 
+                ignoreWhitespaceChanges = id; 
+                showLineNos = id; 
+                tabWidth = id; 
+            }; 
+            SUPERCLASS = NSObject; 
+        }, 
+        {
+            ACTIONS = {doMenuItem = id; doVertScroll = id; scrollDown = id; scrollUp = id; }; 
+            CLASS = MyQuickDrawView; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                horzView = MyHorzCompareView; 
+                leftHorzScroller = id; 
+                rightHorzScroller = id; 
+                vertScroller = MyDiffVertScroller; 
+            }; 
+            SUPERCLASS = NSQuickDrawView; 
+        }
+    ); 
+    IBVersion = 1; 
+}
