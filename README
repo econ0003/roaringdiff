@@ -1,0 +1,6 @@
+This directory is the top of the mainline.
+
+Right now it just contains prod/, which is the RoaringDiff project
+
+One could imagine unit tests, build scripts, whatever, later existing here at the top of the trunk.
+
