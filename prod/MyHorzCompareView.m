@@ -3,7 +3,7 @@
  *  roaringdiff - http://www.biscade.com/tools/diff/
 
 /* 
- * Copyright © 2006-2008 Mitch Haile.
+ * Copyright Â© 2006-2008 Mitch Haile.
  *
  * This file is part of RoaringDiff.
  *
@@ -22,6 +22,8 @@
  */
 
 #import "MyHorzCompareView.h"
+#include "rd_prefs.h"
+#include "qd_utils.h"
 
 #define LEFT_MARGIN 40
 #define LEFT_TEXT (LEFT_MARGIN + 8)
@@ -92,7 +94,7 @@ hc_draw_decoration(NSRect rect)
     if (line < 0) {
         const char *msg = "(No line selected)";
         ForeColor(blackColor);
-        qd_utils_draw_text(LEFT_TEXT, LINE_1_TOP, msg, 4, -1);
+        qd_utils_draw_text(LEFT_TEXT, LINE_1_TOP, msg, 4, -1, 0, strlen(msg));
     } else {
         const char *ls = [diffView selectedLeftLine];
         const char *rs = [diffView selectedRightLine];
