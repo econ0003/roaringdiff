@@ -702,9 +702,6 @@ diff_calc_effective_lines(rd_file_t *f)
     f->n_effective_lines = effective_lines;
 }
 
-#pragma mark -
-#pragma mark *** Public API ***
-
 int
 diff_is_supported(void)
 {

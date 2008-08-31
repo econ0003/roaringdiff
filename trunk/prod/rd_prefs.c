@@ -70,8 +70,6 @@ static void rd_prefs_save(rd_prefs_t *p);
 static void _rd_prefs_load_recent_files(rd_recent_file_t *p, int num_files, CFStringRef app);
 static void _rd_prefs_save_recent_files(rd_recent_file_t *p, int num_files, CFStringRef app);
 
-#pragma mark *** Public API ***
-
 void
 rd_prefs_init(void)
 {
@@ -277,9 +275,6 @@ rd_prefs_debug_dump(void)
 
     fprintf(stderr, "DONE\n");
 }
-
-#pragma mark -
-#pragma mark *** Private ***
 
 static void
 _rd_prefs_save_singleton_int(const char *key, int val, CFStringRef app)
