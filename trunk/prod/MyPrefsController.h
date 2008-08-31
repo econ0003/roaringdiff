@@ -28,17 +28,17 @@
     IBOutlet id fontSize;
     IBOutlet id showLineNos;
     IBOutlet id tabWidth;
-	
-	IBOutlet id ignoreCase;
-	IBOutlet id ignoreWhitespaceChanges;
-	IBOutlet id ignoreAllWhitespace;
-	IBOutlet id ignoreBlankLines;
-	
+    
+    IBOutlet id ignoreCase;
+    IBOutlet id ignoreWhitespaceChanges;
+    IBOutlet id ignoreAllWhitespace;
+    IBOutlet id ignoreBlankLines;
+    
     IBOutlet id colorAdd;
     IBOutlet id colorDel;
     IBOutlet id colorChange;
     IBOutlet id colorBackground;
-	IBOutlet id diffWindow;
+    IBOutlet id diffWindow;
 }
 - (IBAction)editIgnoreCase:(id)sender;
 - (IBAction)editIgnoreWhitespaceChanges:(id)sender;

@@ -27,24 +27,24 @@
 #include "MyDiffHorzScroller.h"
 
 typedef struct {
-	int num_lines;		 /**< Number of lines that will fit onto the view (visible) */
-	int selected_line;	 /**< screen coordinates */
-	int effective_line;	 /**< The effective line number we're on within the sum of the two files */
-	int effective_start; /**< The effective line number that is the first line on the screen */
+    int num_lines;       ///< Number of lines that will fit onto the view (visible) 
+    int selected_line;   ///< screen coordinates
+    int effective_line;  ///< The effective line number we're on within the sum of the two files 
+    int effective_start; ///< The effective line number that is the first line on the screen 
 
-	int num_cols;		 /**< Number of columns that fit into either the left or right view (visible) */
-	int left_col_start;  /**< The left column to start drawing */
-	int right_col_start; /**< The right column to start drawing */
+    int num_cols;        ///< Number of columns that fit into either the left or right view (visible) 
+    int left_col_start;  ///< The left column to start drawing 
+    int right_col_start; ///< The right column to start drawing 
 } qd_diff_view_t;
 
 @interface MyQuickDrawView : NSQuickDrawView
 {
-	IBOutlet MyHorzCompareView *horzView;
-	IBOutlet MyDiffVertScroller *vertScroller;
-	IBOutlet MyDiffHorzScroller *leftHorzScroller, *rightHorzScroller;
-	qd_diff_view_t m_view;
-	const char *m_sel_left, *m_sel_right;
-	int mouse_click_x, mouse_click_y;
+    IBOutlet MyHorzCompareView *horzView;
+    IBOutlet MyDiffVertScroller *vertScroller;
+    IBOutlet MyDiffHorzScroller *leftHorzScroller, *rightHorzScroller;
+    qd_diff_view_t m_view;
+    const char *m_sel_left, *m_sel_right;
+    int mouse_click_x, mouse_click_y;
 }
 
 // Drawing

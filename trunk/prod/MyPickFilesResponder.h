@@ -29,12 +29,12 @@
 {
     IBOutlet id leftFileStats;
     IBOutlet id rightFileStats;
-	IBOutlet id leftFileName;
-	IBOutlet id rightFileName;
-	IBOutlet id diffWindow;
-	IBOutlet id diffView;
-	IBOutlet id changeMenu;
-	IBOutlet MyDiffMenuController *changeMenuController;
+    IBOutlet id leftFileName;
+    IBOutlet id rightFileName;
+    IBOutlet id diffWindow;
+    IBOutlet id diffView;
+    IBOutlet id changeMenu;
+    IBOutlet MyDiffMenuController *changeMenuController;
 }
 - (void)awakeFromNib;
 - (IBAction)buttonCompareFiles:(id)sender;

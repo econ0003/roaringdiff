@@ -25,10 +25,10 @@
 
 @interface MyDiffVertScroller : NSScroller
 {
-	IBOutlet id diffView;
-	NSColor *nscol_add;
-	NSColor *nscol_del;
-	NSColor *nscol_change;
+    IBOutlet id diffView;
+    NSColor *nscol_add;
+    NSColor *nscol_del;
+    NSColor *nscol_change;
 }
 
 - (id)initWithFrame:(NSRect)frame;
