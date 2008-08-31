@@ -3,7 +3,7 @@
  *  roaringdiff - http://www.biscade.com/tools/diff/
 
 /* 
- * Copyright © 2006-2008 Mitch Haile.
+ * Copyright ¬© 2006-2008 Mitch Haile.
  *
  * This file is part of RoaringDiff.
  *
@@ -18,7 +18,7 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+ * along with RoaringDiff.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #import "MyPickFilesResponder.h"
@@ -126,7 +126,7 @@ extern int get_cmd_files(const char **f1, const char **f2, const char **left_lab
     diff_load_opts_from_prefs(&opts);
     diff_file(f1, f2, &g_file, &opts);
     
-    /* Set up the title of the window */
+    // Set up the title of the window
     char title[256];
     snprintf(title,
              sizeof(title),
