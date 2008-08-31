@@ -28,9 +28,9 @@
 
 @interface MyCompareMenuController : NSObject
 {
-	IBOutlet MyQuickDrawView *diffView;
-	IBOutlet id horzView;
-	IBOutlet MyPickFilesResponder *pickFilesResponder;
+    IBOutlet MyQuickDrawView *diffView;
+    IBOutlet id horzView;
+    IBOutlet MyPickFilesResponder *pickFilesResponder;
 }
 
 - (BOOL)validateMenuItem:(NSMenuItem *)item;

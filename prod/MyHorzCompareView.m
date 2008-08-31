@@ -33,81 +33,81 @@
 static void
 hc_draw_decoration(NSRect rect)
 {
-	RGBColor dark_gray = { 0x6666, 0x6666, 0x6666 };
-	Rect qdr;
-	qdr.left   = (short) 0;
-	qdr.top    = (short) 0;
-	qdr.right  = (short) rect.size.width;
-	qdr.bottom = (short) rect.size.height;
-	
-	RGBColor col;
-	qd_utils_rgbcolor_from_int(rd_prefs_get_color_background(), &col);
-	RGBForeColor(&col);
-	PaintRect(&qdr);
-	
-	RGBForeColor(&dark_gray);
-	qdr.bottom--;
-	qdr.right--;
-	FrameRect(&qdr);
+    RGBColor dark_gray = { 0x6666, 0x6666, 0x6666 };
+    Rect qdr;
+    qdr.left   = (short) 0;
+    qdr.top    = (short) 0;
+    qdr.right  = (short) rect.size.width;
+    qdr.bottom = (short) rect.size.height;
+    
+    RGBColor col;
+    qd_utils_rgbcolor_from_int(rd_prefs_get_color_background(), &col);
+    RGBForeColor(&col);
+    PaintRect(&qdr);
+    
+    RGBForeColor(&dark_gray);
+    qdr.bottom--;
+    qdr.right--;
+    FrameRect(&qdr);
 
-	// put in a horz line between the two segments
-	MoveTo(0,         HORZ_LINE_Y);
-	LineTo(qdr.right, HORZ_LINE_Y);
+    // put in a horz line between the two segments
+    MoveTo(0,         HORZ_LINE_Y);
+    LineTo(qdr.right, HORZ_LINE_Y);
 
-	// draw a vertical line for the left margin
-	qdr.left = LEFT_MARGIN - 2;
-	qdr.right = qdr.left + 2;
-	PaintRect(&qdr);
-	
-	// label the two lines
-	const char *msg = NULL;
-	int w = 0;
-	int x = 0;
-	
-	msg = "left";
-	w = TextWidth(msg, 0, strlen(msg));
-	x = LEFT_MARGIN - 4 - w;
-	MoveTo(x, LINE_1_TOP);
-	DrawText(msg, 0, strlen(msg));
+    // draw a vertical line for the left margin
+    qdr.left = LEFT_MARGIN - 2;
+    qdr.right = qdr.left + 2;
+    PaintRect(&qdr);
+    
+    // label the two lines
+    const char *msg = NULL;
+    int w = 0;
+    int x = 0;
+    
+    msg = "left";
+    w = TextWidth(msg, 0, strlen(msg));
+    x = LEFT_MARGIN - 4 - w;
+    MoveTo(x, LINE_1_TOP);
+    DrawText(msg, 0, strlen(msg));
 
-	msg = "right";
-	w = TextWidth(msg, 0, strlen(msg));
-	x = LEFT_MARGIN - 4 - w;
-	MoveTo(x, LINE_2_TOP);
-	DrawText(msg, 0, strlen(msg));
+    msg = "right";
+    w = TextWidth(msg, 0, strlen(msg));
+    x = LEFT_MARGIN - 4 - w;
+    MoveTo(x, LINE_2_TOP);
+    DrawText(msg, 0, strlen(msg));
 }
 
 @implementation MyHorzCompareView
 
 - (void)drawRect:(NSRect)rect
 {
-	short font_id = 0;
-	GetFNum("\pCourier", &font_id);
-	TextFont(font_id);
-	TextSize(10);
-	
-	hc_draw_decoration(rect);
-	
-	int line = [diffView selectedLine];
-	if (line < 0) {
-		const char *msg = "(No line selected)";
-		ForeColor(blackColor);
-		qd_utils_draw_text(LEFT_TEXT, LINE_1_TOP, msg, 4, -1);
-	} else {
-		const char *ls = [diffView selectedLeftLine];
-		const char *rs = [diffView selectedRightLine];
-		if (ls == NULL) {
-			ls = "";
-		}
-		
-		if (rs == NULL) {
-			rs = "";
-		}
-		
-		ForeColor(blackColor);
-		qd_utils_draw_text(LEFT_TEXT, LINE_1_TOP, ls, 4, -1, 0, strlen(ls));
-		qd_utils_draw_text(LEFT_TEXT, LINE_2_TOP, rs, 4, -1, 0, strlen(rs));
-	}
+    short font_id = 0;
+    GetFNum("\pCourier", &font_id);
+    TextFont(font_id);
+    TextSize(10);
+    
+    hc_draw_decoration(rect);
+    
+    int line = [diffView selectedLine];
+    if (line < 0) {
+        const char *msg = "(No line selected)";
+        ForeColor(blackColor);
+        qd_utils_draw_text(LEFT_TEXT, LINE_1_TOP, msg, 4, -1);
+    } else {
+        const char *ls = [diffView selectedLeftLine];
+        const char *rs = [diffView selectedRightLine];
+        if (ls == NULL) {
+            ls = "";
+        }
+        
+        if (rs == NULL) {
+            rs = "";
+        }
+        
+        ForeColor(blackColor);
+        qd_utils_draw_text(LEFT_TEXT, LINE_1_TOP, ls, 4, -1, 0, strlen(ls));
+        qd_utils_draw_text(LEFT_TEXT, LINE_2_TOP, rs, 4, -1, 0, strlen(rs));
+    }
 }
 
 @end

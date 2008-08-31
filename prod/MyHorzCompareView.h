@@ -26,7 +26,7 @@
 @interface MyHorzCompareView : NSQuickDrawView
 {
     IBOutlet id *diffView;
-	NSScroller *scroller;
+    NSScroller *scroller;
 }
 
 - (void)drawRect:(NSRect)rect;

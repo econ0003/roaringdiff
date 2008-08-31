@@ -27,18 +27,18 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-	[super initWithFrame:frame];
-	[self setEnabled:YES]; 
-	[self setTarget:self];
-	[self setAction:@selector(doHorzScroll:)];
-	
-	return self;
+    [super initWithFrame:frame];
+    [self setEnabled:YES]; 
+    [self setTarget:self];
+    [self setAction:@selector(doHorzScroll:)];
+    
+    return self;
 }
 
 - (void)doHorzScroller:(id)sender 
 {
-	(void) sender;
-	[diffView doHorzScroll:self];
+    (void) sender;
+    [diffView doHorzScroll:self];
 }
 
 

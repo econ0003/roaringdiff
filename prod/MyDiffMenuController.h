@@ -27,7 +27,7 @@
 @interface MyDiffMenuController : NSObject
 {
     IBOutlet id menuData;
-	IBOutlet id diffView;
+    IBOutlet id diffView;
 }
 
 - (IBAction)menuSelect:(id)sender;

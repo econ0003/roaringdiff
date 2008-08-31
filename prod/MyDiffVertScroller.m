@@ -31,74 +31,76 @@
 
 - (id)initWithFrame:(NSRect)frame
 {
-	[super initWithFrame:frame];
-	[self setEnabled:YES]; 
-	[self setTarget:self];
-	[self setAction:@selector(doVertScroll:)];
-	
-	return self;
+    [super initWithFrame:frame];
+    [self setEnabled:YES]; 
+    [self setTarget:self];
+    [self setAction:@selector(doVertScroll:)];
+    
+    return self;
 }
 
 - (void)doVertScroll:(id)sender 
 {
-	[diffView doVertScroll:sender];
+    [diffView doVertScroll:sender];
 }
 
 - (void)drawRect:(NSRect) rect
 {
-	[super drawRect:rect];
-	
+    [super drawRect:rect];
+    
 #if USE_CUSTOM_COLORS
-	/* XXX it's possible for the user to change these colors... so they may not be the same on every draw */
-	NSColor *nscol_add    = qd_utils_nscolor_from_int(rd_prefs_get_color_add()),
-			*nscol_del    = qd_utils_nscolor_from_int(rd_prefs_get_color_del()),
-			*nscol_change = qd_utils_nscolor_from_int(rd_prefs_get_color_change());
+    // XXX it's possible for the user to change these colors...
+    //     so they may not be the same on every draw */
+    NSColor *nscol_add    = qd_utils_nscolor_from_int(rd_prefs_get_color_add()),
+            *nscol_del    = qd_utils_nscolor_from_int(rd_prefs_get_color_del()),
+            *nscol_change = qd_utils_nscolor_from_int(rd_prefs_get_color_change());
 #else
-	NSColor *nscol = qd_utils_nscolor_from_int(0x00666666);
+    NSColor *nscol = qd_utils_nscolor_from_int(0x00666666);
 #endif
-	NSRect dr;
-	NSRect slotRect = [self rectForPart:NSScrollerKnobSlot];
-	/* There is some decorative stuff at both ends of the knob slot that the slotRect includes.  Cull that area */
-	slotRect.origin.y += 8.0f;
-	slotRect.size.height -= 16.0f;
+    NSRect dr;
+    NSRect slotRect = [self rectForPart:NSScrollerKnobSlot];
+    // There is some decorative stuff at both ends of the knob slot that the slotRect includes.  
+    // Cull that area
+    slotRect.origin.y += 8.0f;
+    slotRect.size.height -= 16.0f;
 
 #if USE_CUSTOM_COLORS
-	dr.size.width = slotRect.size.width - 10.0f;
-	dr.origin.x = slotRect.origin.x + 5.0f;
+    dr.size.width = slotRect.size.width - 10.0f;
+    dr.origin.x = slotRect.origin.x + 5.0f;
 #else
-	dr.size.width = slotRect.size.width - 8.0f;
-	dr.origin.x = slotRect.origin.x + 4.0f;
+    dr.size.width = slotRect.size.width - 8.0f;
+    dr.origin.x = slotRect.origin.x + 4.0f;
 #endif
 
-	/* Draw those lines! */
-	int i;
-	for (i = 0; i < g_file.n_diffs; i++) {
-		rd_diff_t *d = &g_file.diffs[i];
-		float relative_pos = ((float) d->effective_line) / ((float) g_file.n_effective_lines);
-		float relative_height = ((float) (d->n_changes + d->n_deletes)) / ((float) g_file.n_effective_lines);
-		dr.origin.y = slotRect.origin.y + (relative_pos * slotRect.size.height);
-		dr.size.height = relative_height * slotRect.size.height;
-			
+    // Draw those lines!
+    int i;
+    for (i = 0; i < g_file.n_diffs; i++) {
+        rd_diff_t *d = &g_file.diffs[i];
+        float relative_pos = ((float) d->effective_line) / ((float) g_file.n_effective_lines);
+        float relative_height = ((float) (d->n_changes + d->n_deletes)) / ((float) g_file.n_effective_lines);
+        dr.origin.y = slotRect.origin.y + (relative_pos * slotRect.size.height);
+        dr.size.height = relative_height * slotRect.size.height;
+            
 #if USE_CUSTOM_COLORS
-		switch (d->d_type) {
-		case D_ADD:
-			[nscol_add set];
-			break;
-		case D_DEL:
-			[nscol_del set];
-			break;
-		case D_EDIT:
-			[nscol_change set];
-			break;
-		}
+        switch (d->d_type) {
+        case D_ADD:
+            [nscol_add set];
+            break;
+        case D_DEL:
+            [nscol_del set];
+            break;
+        case D_EDIT:
+            [nscol_change set];
+            break;
+        }
 #else
-		[nscol set];
+        [nscol set];
 #endif
-		NSRectFill(dr);
-	}
-	
-	/* Redraw the knob over our mess */
-	[self drawKnob];
+        NSRectFill(dr);
+    }
+    
+    // Redraw the knob over our mess
+    [self drawKnob];
 }
 
 @end
