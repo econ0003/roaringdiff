@@ -53,11 +53,10 @@ update_message_for_file(NSComboBox *ns_filename, NSTextField *msg_field)
 static void
 select_file(NSComboBox *ns_field)
 {
-    NSArray *fileTypes = [NSArray arrayWithObjects: NSFileTypeForHFSTypeCode( 'TEXT' ), nil];
     NSOpenPanel *oPanel = [NSOpenPanel openPanel];
  
     [oPanel setAllowsMultipleSelection:NO];
-    int result = [oPanel runModalForDirectory:NSHomeDirectory() file:nil types:fileTypes];
+    int result = [oPanel runModalForDirectory:NSHomeDirectory() file:nil types:nil];
     if (result == NSOKButton) {
         NSArray *filesToOpen = [oPanel filenames];
         if ([filesToOpen count] == 1) {
