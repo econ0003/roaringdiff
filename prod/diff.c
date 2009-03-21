@@ -18,7 +18,7 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with RoaringDiff.  If not, see <http://www.gnu.org/licenses/>.
+ * along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <assert.h>
@@ -35,6 +35,8 @@
 
 #define GNU_DIFF_PATH "/usr/bin/diff"
 #define RD_FILE_MAGIC 0x19690622
+
+#define NO_NEWLINE "\\ No newline at end of file"
 
 rd_file_t g_file;
 rd_file_t *the_file = &g_file;
@@ -490,6 +492,11 @@ handle_diff_del(FILE *p, rd_diff_t *d)
             break;
         }
         
+        if (strstr(line, NO_NEWLINE) != NULL) {
+            fprintf(stderr, "%s", line);
+            continue;
+        }
+
         assert(line[0] == '<');
         track_line_delete(d, d->f1_line_start + num_lines);
         num_lines++;
@@ -565,6 +572,11 @@ handle_diff_edit(FILE *p, rd_diff_t *d)
             if (got_separator) {
                 line_attach(d, line);
             } else {
+                if (strstr(line, NO_NEWLINE) != NULL) {
+                    fprintf(stderr, "%s", line);
+                    continue;
+                }
+
                 assert(line[0] == '<');
                 int lineno = d->f1_line_start + num_lines;
                 track_line_delete(d, lineno);
@@ -701,6 +713,9 @@ diff_calc_effective_lines(rd_file_t *f)
     
     f->n_effective_lines = effective_lines;
 }
+
+#pragma mark -
+#pragma mark *** Public API ***
 
 int
 diff_is_supported(void)
