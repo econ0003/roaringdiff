@@ -17,6 +17,7 @@
 		302E19910A94F7F500F1A6AE /* MyCompareMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302E19900A94F7F500F1A6AE /* MyCompareMenuController.m */; };
 		3053C9D80A91878C001AA80E /* MyQuickDrawView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3053C9D70A91878C001AA80E /* MyQuickDrawView.m */; };
 		3053CA040A9200BF001AA80E /* diff.c in Sources */ = {isa = PBXBuildFile; fileRef = 3053CA030A9200BF001AA80E /* diff.c */; };
+		308B583C0F74A43C00995F05 /* XParseGeometry.c in Sources */ = {isa = PBXBuildFile; fileRef = 308B583B0F74A43C00995F05 /* XParseGeometry.c */; };
 		309751920A980A9100D0E8CF /* MyDiffHorzScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 309751910A980A9100D0E8CF /* MyDiffHorzScroller.m */; };
 		8D11072A0486CEB800E47090 /* MainMenu.nib in Resources */ = {isa = PBXBuildFile; fileRef = 29B97318FDCFA39411CA2CEA /* MainMenu.nib */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
@@ -52,6 +53,8 @@
 		3053C9D70A91878C001AA80E /* MyQuickDrawView.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyQuickDrawView.m; sourceTree = "<group>"; };
 		3053CA030A9200BF001AA80E /* diff.c */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.c; path = diff.c; sourceTree = "<group>"; };
 		3053CA050A9200C4001AA80E /* diff.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = diff.h; sourceTree = "<group>"; };
+		308B583A0F74A43C00995F05 /* XParseGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XParseGeometry.h; sourceTree = "<group>"; };
+		308B583B0F74A43C00995F05 /* XParseGeometry.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = XParseGeometry.c; sourceTree = "<group>"; };
 		309751900A980A9100D0E8CF /* MyDiffHorzScroller.h */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.h; path = MyDiffHorzScroller.h; sourceTree = "<group>"; };
 		309751910A980A9100D0E8CF /* MyDiffHorzScroller.m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = MyDiffHorzScroller.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* roaringdiff_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = roaringdiff_Prefix.pch; sourceTree = "<group>"; };
@@ -119,6 +122,8 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				308B583A0F74A43C00995F05 /* XParseGeometry.h */,
+				308B583B0F74A43C00995F05 /* XParseGeometry.c */,
 				309751900A980A9100D0E8CF /* MyDiffHorzScroller.h */,
 				309751910A980A9100D0E8CF /* MyDiffHorzScroller.m */,
 				301136150A967BED00A9CABE /* MyDiffVertScroller.h */,
@@ -233,6 +238,7 @@
 				301133A40A95694100A9CABE /* qd_utils.m in Sources */,
 				301136170A967BED00A9CABE /* MyDiffVertScroller.m in Sources */,
 				309751920A980A9100D0E8CF /* MyDiffHorzScroller.m in Sources */,
+				308B583C0F74A43C00995F05 /* XParseGeometry.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

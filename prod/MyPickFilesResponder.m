@@ -22,6 +22,7 @@
  */
 
 #import "MyPickFilesResponder.h"
+#include "XParseGeometry.h"
 #include "diff.h"
 #include "rd_prefs.h"
 #include <errno.h>
@@ -68,7 +69,10 @@ select_file(NSComboBox *ns_field)
 
 @implementation MyPickFilesResponder
 
+// XXX: Clearly this is a dumb way to get data out of main.m.
 extern int get_cmd_files(const char **f1, const char **f2, const char **left_label, const char **right_label);
+extern int use_geometry(void);
+extern void get_geometry(my_geometry_t *geom);
 
 - (void)awakeFromNib
 {
@@ -123,6 +127,7 @@ extern int get_cmd_files(const char **f1, const char **f2, const char **left_lab
     
     rd_diff_opts_t opts;
     diff_load_opts_from_prefs(&opts);
+    
     diff_file(f1, f2, &g_file, &opts);
     
     // Set up the title of the window
@@ -136,13 +141,24 @@ extern int get_cmd_files(const char **f1, const char **f2, const char **left_lab
              g_file.n_diffs == 1 ? "" : "s");
     [diffWindow setTitle:[[NSString alloc] initWithCString:title]];
     
-    /*
-     * HACK:  By default, "maximize" the window on the parent screen.
-     *        To do this, just set the size of the window to the size on the parent screen. 
-     *        The window server takes care of the dock and menubar.
-     */
     NSRect my_rect = [diffWindow frame];
-    my_rect.size = [[diffWindow screen] frame].size;
+    if (use_geometry()) {
+        my_geometry_t geom;
+        get_geometry(&geom);
+        my_rect.size.width  = geom.geom_width;
+        my_rect.size.height = geom.geom_height;
+        my_rect.origin.x = geom.geom_xoffset;
+        my_rect.origin.y = geom.geom_yoffset;
+    
+    } else {
+        /*
+         * HACK:  "maximize" the window on the parent screen.
+         *        To do this, just set the size of the window to the size on the parent screen. 
+         *        The window server takes care of the dock and menubar.
+         */
+        my_rect.size = [[diffWindow screen] frame].size;
+    }
+    
     [diffWindow setFrame:my_rect display:YES];
 
     // Show the diff window if it is invisible.

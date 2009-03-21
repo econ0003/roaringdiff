@@ -31,6 +31,7 @@
 #include <unistd.h>
 #include "diff.h"
 #include "rd_prefs.h"
+#include "XParseGeometry.h"
 
 typedef struct {
     int use_files;
@@ -41,11 +42,17 @@ typedef struct {
     char label_2[PATH_MAX];    // GNU diff supports -L arguments to label the files 
     
     int use_prefs;
+    
+    //  X11-style geometry can be specified on the command line:
+    int use_geometry;
+    my_geometry_t geometry;
 } cmd_opts_t;
 
 static cmd_opts_t g_opts;
 
 int get_cmd_files(const char **f1, const char **f2, const char **left_label, const char **right_label);
+int use_geometry(void);
+void get_geometry(my_geometry_t *geom);
 
 static void
 init_cmd_opts(cmd_opts_t *o)
@@ -59,9 +66,33 @@ init_cmd_opts(cmd_opts_t *o)
 static void
 usage(void)
 {
-    fprintf(stderr, "Usage: rdiff [-u] [-L <left-label> -L <right-label>] <left-file> <right-file>\n");
+    fprintf(stderr, "Usage: rdiff [-u] [-L <left-label> -L <right-label>] [-geometry <x11-geometry>] <left-file> <right-file>\n");
     fprintf(stderr, "Note that -u is ignored, but supported for default svn diff behavior.\n");
+    fprintf(stderr, "\n");
+    fprintf(stderr, "X11 geometry arguments are in the format of:\n");
+    fprintf(stderr, "   -geometry <width>x<height>+<xoffset>+<yoffset>\n");
+    fprintf(stderr, "   (In real X11, - can be used instead of +, but it's not supported here.)\n");
+    fprintf(stderr, "   All of these coordinates are in pixels.  It is possible to put your diff\n");
+    fprintf(stderr, "   window somewhere that is not on the monitor!\n");
     exit(1);
+}
+
+
+static void
+parse_geometry_string(char *arg, cmd_opts_t *o)
+{
+    assert(arg != NULL);
+    assert(o   != NULL);
+    
+    int ret = My_XParseGeometry(arg, &o->geometry);
+
+    fprintf(stderr,
+            "parse geometry returned %d { w=%d, h=%d, x=%d, y=%d }\n",
+            ret, 
+            o->geometry.geom_width,
+            o->geometry.geom_height,
+            o->geometry.geom_xoffset,
+            o->geometry.geom_yoffset);
 }
 
 static void
@@ -88,6 +119,10 @@ parse_cmd_opts(int argc, char **argv, cmd_opts_t *o)
          * svn calls diff normally with:
          * -u -L <label_1> -L <label_2> <file_1> <file_2>
          */
+         
+        /*
+         * XXX: Why not use getopt??
+         */
         int i = 0;
         while (i < argc - 2) {
             if (strcmp(argv[i], "-L") == 0) {
@@ -96,6 +131,16 @@ parse_cmd_opts(int argc, char **argv, cmd_opts_t *o)
                     strncpy(o->label_1, argv[i], sizeof(o->label_1));
                 } else if (o->label_2[0] == '\0') {
                     strncpy(o->label_2, argv[i], sizeof(o->label_2));
+                } else {
+                    usage();
+                }
+            }
+            
+            if (strcmp(argv[i], "-geometry") == 0) {
+                if (i + 1 < argc) {
+                    parse_geometry_string(argv[i + 1], o);
+                    o->use_geometry = 1;
+                    i++;
                 } else {
                     usage();
                 }
@@ -180,6 +225,18 @@ get_cmd_files(const char **f1, const char **f2, const char **left_label, const c
     
     return 0;
 }
+
+int use_geometry(void)
+{
+    return g_opts.use_geometry;
+}
+
+void get_geometry(my_geometry_t *geom)
+{
+    assert(geom != NULL);
+    (void) memcpy(geom, &g_opts.geometry, sizeof(*geom));
+}
+
 
 static void
 dump_opts(int argc, char **argv)
